@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# printMat
+
+
+
+Provides basic functions to make it more easy to work with big matrices with long names.
+
+## Installation
+
+You can install the development version of printMat like so:
+
+``` r
+remotes::install_github("AlexWeinreb/printMat")
+```
+
+## head
+
+R's defaults `print()` and `head()` attempt to print everything, filling the console. `mathead()` will trim names if necessary and only print the top-left corner of a matrix.
+ 
+```{r example}
+library(printMat)
+mat <- matrix(runif(50*60), nrow = 50)
+rownames(mat) <- c("qwertyuiopasdfghjkl", "123456789123456789") |> rep(25)
+mathead(mat)
+```
+
+You can use it to overwrite the default `utils:::head.matrix()`:
+
+```{r eval=FALSE}
+usethis::edit_r_profile()
+
+# and add
+head.matrix <- printMat::mathead
+```
+
+
+# image
+
+For big matrices, the default `image()` takes a while to render, and inverts the coordinates, `matimage()` is a small wrapper. It largely reuses the code of `imageM()` in the examples of `?image`.
+
+
+
+
